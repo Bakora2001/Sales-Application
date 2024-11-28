@@ -1,5 +1,54 @@
-# Vue 3 + Vite
+# MaliSafi Limited
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### Author: Maxwel Omwoyo  
+### Date: Thursday, November 28, 2024  
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+MaliSafi Limited is a sales management application built with Vue.js. The application is designed to manage sales operations, including managing products, customers, and sales representatives.
+
+---
+
+## Features
+
+1. **Admin Functionalities**:
+   - Create and manage products.
+   - View all customers, sales representatives, and products.
+
+2. **Sales Representative Functionalities**:
+   - Receive orders from customers.
+   - Process and manage customer orders.
+
+3. **Customer Functionalities**:
+   - Browse products.
+   - Place orders for products.
+
+---
+
+## Product Details
+
+Each product in the application includes:
+- **Price**: The cost of the product.
+- **Quantity**: Available stock for the product.
+- **Order Number**: A unique identifier for the product orders.
+
+---
+
+## Tech Stack
+
+- **Frontend Framework**: Vue.js
+- **Backend Framework**: 
+- **Styling**: Tailwind CSS or custom CSS
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js installed
+- npm 
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Bakora2001/Sales-Application.git
+   cd sales-app
