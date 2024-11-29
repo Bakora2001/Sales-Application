@@ -1,22 +1,26 @@
-import { createRouter, createWebHistory } from 'vue-router'; 
-import AdminDashboard from '@/components/AdminDashboard.vue'; 
-import CustomerDashboard from '@/components/CustomerDashboard.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import AdminDashboard from '@/views/AdminDashboard.vue';
+import CustomerDashboard from '@/views/CustomerDashboard.vue';
+// import SalesRepresentativeDashboard from '@/views/SalesRepresentativeDashboard.vue';
 
-// Define routes
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: CustomerDashboard, // Routed to CustomerDashboard
+    component: CustomerDashboard,
   },
   {
     path: '/admin',
     name: 'admin',
-    component: AdminDashboard, // Routed to AdminDashboard
+    component: AdminDashboard,
   },
+//   {
+//     path: '/sales-representative',
+//     name: 'salesRepresentative',
+//     component: SalesRepresentativeDashboard,
+//   },
 ];
 
-// Create the router instance
 const router = createRouter({
   history: createWebHistory(),
   routes,

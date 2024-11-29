@@ -1,22 +1,10 @@
 <script setup>
-import AdminDashboard from './components/AdminDashboard.vue';
+import { RouterView } from 'vue-router'; // Import RouterView to dynamically load components
 </script>
 
 <template>
-    <AdminDashboard />
+  <div>
+    <!-- Render the component based on the current route -->
+    <RouterView />
+  </div>
 </template>
-
-<!-- <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style> -->
