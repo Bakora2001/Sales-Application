@@ -1,11 +1,9 @@
-import Vue from 'vue';
-import router from './router';
-// import store from './store';
-import './style.css';
-import App from './App.vue';
-// I am Creating a new Vue instance that i'll mount it to the DOM
-new Vue({
-    router, // puts the router into the Vue instance
-    render: h => h(App), // Rendering the root App component
-  }).$mount('#app'); // Mounting the Vue instance to the DOM
+import { createApp } from 'vue'; // I am importing Vue 3 createApp method
+import App from './App.vue'; // I am importing the root App component
+import router from './router'; // I am importing the router
+import './style.css'; // I am importing style.css in src folder
 
+// I am creating the app instance that has the router and mounts it to the app
+createApp(App)
+  .use(router) 
+  .mount('#app'); // It mounts the app to the DOM

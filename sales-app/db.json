@@ -1,15 +1,18 @@
 {
-    "products": [
-      { "id": 1, "name": "Product A", "price": 100, "quantity": 10 },
-      { "id": 2, "name": "Product B", "price": 200, "quantity": 20 }
-    ],
-    "customers": [
-      { "id": 1, "name": "John Doe" },
-      { "id": 2, "name": "Jane Smith" }
-    ],
-    "sales-representatives": [
-      { "id": 1, "name": "Rep A" },
-      { "id": 2, "name": "Rep B" }
-    ]
-  }
-  
+  "products": [
+    {
+      "id": "bd4d",
+      "name": "Maxwel bakora",
+      "price": 120,
+      "quantity": 4
+    },
+    {
+      "id": "b2f6",
+      "name": "Key",
+      "price": 300,
+      "quantity": 6
+    }
+  ],
+  "customers": [],
+  "sales-representatives": []
+}
