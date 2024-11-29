@@ -2,24 +2,24 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AdminDashboard from '@/components/AdminDashboard.vue'; 
 import CustomerDashboard from '@/components/CustomerDashboard.vue';
 
-// Defined the routes that i'll use on my components
+// Define routes
 const routes = [
-    {
-      path: '/',
-      name: 'home',
-      component: CustomerDashboard, // router component where it can be rendered
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: AdminDashboard,
-    },
-  ];
+  {
+    path: '/',
+    name: 'home',
+    component: CustomerDashboard, // Routed to CustomerDashboard
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminDashboard, // Routed to AdminDashboard
+  },
+];
 
-// I have created a router instance
+// Create the router instance
 const router = createRouter({
-  history: createWebHistory(), // Use history mode
-  routes, // Pass in the routes
+  history: createWebHistory(),
+  routes,
 });
 
-export default router; // Export the router to use it in the main.js
+export default router;
