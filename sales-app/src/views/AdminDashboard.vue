@@ -1,169 +1,153 @@
 <template>
-    <div class="bg-purple-700 min-h-screen p-6 md:p-8">
-      <!-- Dashboard Header -->
-      <h1 class="text-4xl font-extrabold text-center text-white mb-8">Admin Dashboard</h1>
-  
-      <!-- Products Section -->
-      <section class="mb-8 bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-3xl font-semibold text-purple-600 mb-4">Manage Products</h2>
-        <form @submit.prevent="addProduct" class="flex flex-col sm:flex-row gap-4 items-center mb-6">
-          <input
-            v-model="newProduct.name"
-            type="text"
-            placeholder="Product Name"
-            class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/3 focus:ring-2 focus:ring-purple-500"
-            required
-          />
-          <input
-            v-model.number="newProduct.price"
-            type="number"
-            placeholder="Price"
-            class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/3 focus:ring-2 focus:ring-purple-500"
-          />
-          <input
-            v-model.number="newProduct.quantity"
-            type="number"
-            placeholder="Quantity"
-            class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/3 focus:ring-2 focus:ring-purple-500"
-          />
+  <div class="flex bg-purple-700 min-h-screen text-white">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-purple-800 p-6">
+      <h2 class="text-2xl font-bold mb-6">Admin Dashboard</h2>
+      <nav class="space-y-4">
+        <button
+          @click="view = 'addProduct'"
+          :class="{'bg-purple-600': view === 'addProduct'}"
+          class="block w-full py-2 px-4 text-left rounded hover:bg-purple-600 transition"
+        >
+          Add Product
+        </button>
+        <button
+          @click="view = 'viewProducts'"
+          :class="{'bg-purple-600': view === 'viewProducts'}"
+          class="block w-full py-2 px-4 text-left rounded hover:bg-purple-600 transition"
+        >
+          View Products
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Add Product Section -->
+      <section v-if="view === 'addProduct'" class="bg-purple-600 p-6 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-semibold mb-4">Add New Product</h2>
+        <form @submit.prevent="addProduct" class="space-y-4">
+          <div>
+            <label for="productName" class="text-white">Product Name:</label>
+            <input
+              v-model="newProduct.product"
+              type="text"
+              id="productName"
+              required
+              class="w-full p-2 rounded-md"
+            />
+          </div>
+          <div>
+            <label for="price" class="text-white">Price:</label>
+            <input
+              v-model="newProduct.price"
+              type="number"
+              id="price"
+              required
+              class="w-full p-2 rounded-md"
+            />
+          </div>
+          <div>
+            <label for="quantity" class="text-white">Quantity:</label>
+            <input
+              v-model="newProduct.quantity"
+              type="number"
+              id="quantity"
+              required
+              class="w-full p-2 rounded-md"
+            />
+          </div>
+          <div>
+            <label for="orderNo" class="text-white">Order No:</label>
+            <input
+              v-model="newProduct.orderNo"
+              type="number"
+              id="orderNo"
+              required
+              class="w-full p-2 rounded-md"
+            />
+          </div>
           <button
             type="submit"
-            class="bg-purple-600 text-white rounded-lg px-6 py-2 mt-4 sm:mt-0 sm:ml-4 hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto"
+            class="w-full py-2 bg-purple-700 rounded hover:bg-purple-800 transition"
           >
             Add Product
           </button>
         </form>
-  
-        <ul class="border border-gray-300 rounded-lg bg-white shadow-sm">
-          <li
+      </section>
+
+      <!-- View Products Section -->
+      <section v-if="view === 'viewProducts'" class="bg-purple-600 p-6 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-semibold mb-4">Product List</h2>
+        <div v-if="products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
             v-for="product in products"
-            :key="product.OrderNo"
-            class="flex flex-col sm:flex-row justify-between items-center py-3 px-4 border-b"
+            :key="product.orderNo"
+            class="border border-purple-400 rounded-lg p-4 bg-purple-500 hover:shadow-lg transition-shadow duration-300"
           >
-            <div class="sm:w-1/3 text-lg font-medium text-purple-700">{{ product.name }}</div>
-            <div class="sm:w-1/3 text-gray-700">${{ product.price }}</div>
-            <div class="sm:w-1/3 text-gray-500">Quantity: {{ product.quantity }}</div>
-            <div class="sm:w-1/3 text-gray-500">Order No: {{ product.OrderNo }}</div>
-          </li>
-        </ul>
+            <h3 class="text-lg font-bold text-white mb-2">{{ product.product }}</h3>
+            <p class="text-white mb-1">Order No: {{ product.orderNo }}</p>
+            <p class="text-white mb-1">Price: ${{ product.price }}</p>
+            <p class="text-white mb-1">Quantity: {{ product.quantity }}</p>
+          </div>
+        </div>
+        <p v-else class="text-lg text-center">No products added yet.</p>
       </section>
-  
-      <!-- Customers Section -->
-      <section class="mb-8 bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-3xl font-semibold text-purple-600 mb-4">Customer List</h2>
-        <ul class="border border-gray-300 rounded-lg bg-white shadow-sm">
-          <li
-            v-for="customer in customers"
-            :key="customer.id"
-            class="py-3 px-4 border-b text-gray-800"
-          >
-            <span class="font-medium">{{ customer.name }}</span> - 
-            <span class="text-gray-500">{{ customer.email }}</span>
-          </li>
-        </ul>
-      </section>
-  
-      <!-- Sales Representatives Section -->
-      <section class="bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-3xl font-semibold text-purple-600 mb-4">Sales Representatives</h2>
-        <ul class="border border-gray-300 rounded-lg bg-white shadow-sm">
-          <li
-            v-for="rep in salesRepresentatives"
-            :key="rep.id"
-            class="py-3 px-4 border-b text-gray-800"
-          >
-            <span class="font-medium">{{ rep.name }}</span> - 
-            <span class="text-gray-500">{{ rep.email }}</span>
-          </li>
-        </ul>
-      </section>
-    </div>
-  </template>
-  
-  <script>
-  import api from "@/services/api.js";
-  
-  export default {
-    name: "AdminDashboard",
-    data() {
-      return {
-        products: [],
-        customers: [],
-        salesRepresentatives: [],
-        newProduct: {
-          name: "",
-          price: null, // Set to null to avoid defaulting to 0
-          quantity: null, // Set to null to avoid defaulting to 0
-        },
-        nextOrderNo: 1, // Start with 1 for OrderNo
-      };
+    </main>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "AdminDashboard",
+  data() {
+    return {
+      view: "addProduct", // Default view
+      newProduct: {
+        product: "",
+        price: 0,
+        quantity: 0,
+        orderNo: 0,
+      }, // Product details to be added
+      products: [], // List of products fetched from the backend
+    };
+  },
+  methods: {
+    // Fetch products from the backend
+    fetchProducts() {
+      axios
+        .get("http://localhost:3000/products") // API endpoint to fetch products
+        .then((response) => {
+          this.products = response.data; // Set the fetched products to the state
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the products:", error);
+        });
     },
-    methods: {
-      async fetchProducts() {
-        try {
-          const response = await api.get("/products");
-          this.products = response.data;
-  
-          // Initialize nextOrderNo based on existing products
-          if (this.products.length > 0) {
-            this.nextOrderNo = Math.max(...this.products.map(p => p.OrderNo)) + 1;
-          }
-        } catch (error) {
-          console.error("Error fetching products:", error);
-        }
-      },
-      async fetchCustomers() {
-        try {
-          const response = await api.get("/customers");
-          this.customers = response.data;
-        } catch (error) {
-          console.error("Error fetching customers:", error);
-        }
-      },
-      async fetchSalesRepresentatives() {
-        try {
-          const response = await api.get("/sales-representatives");
-          this.salesRepresentatives = response.data;
-        } catch (error) {
-          console.error("Error fetching sales representatives:", error);
-        }
-      },
-      async addProduct() {
-        // Check if price and quantity are valid before pushing
-        if (this.newProduct.name && this.newProduct.price !== null && this.newProduct.quantity !== null) {
-          try {
-            // Create new product with unique OrderNo
-            const productToAdd = {
-              ...this.newProduct,
-              OrderNo: this.nextOrderNo, // Assign the unique OrderNo
-            };
-  
-            // Post to the API (or directly add it if you don't need an API)
-            const response = await api.post("/products", productToAdd);
-            this.products.push(response.data); // Add the new product to the list
-  
-            // Increment OrderNo for the next product
-            this.nextOrderNo++;
-  
-            // Reset the form
-            this.newProduct = { name: "", price: null, quantity: null };
-          } catch (error) {
-            console.error("Error adding product:", error);
-          }
-        } else {
-          console.error("Please fill out all fields correctly.");
-        }
-      },
+    // Add a product to the backend
+    addProduct() {
+      axios
+        .post("http://localhost:3000/products", this.newProduct) // Add the product to the backend
+        .then((response) => {
+          this.products.push(response.data); // Add the newly created product to the products array
+          alert("Product added successfully.");
+          this.newProduct = { product: "", price: 0, quantity: 0, orderNo: 0 }; // Reset form
+        })
+        .catch((error) => {
+          console.error("There was an error adding the product:", error);
+        });
     },
-    mounted() {
-      this.fetchProducts();
-      this.fetchCustomers();
-      this.fetchSalesRepresentatives();
-    },
-  };
-  </script>
-  
-  <style scoped>
-  
-  </style>
-  
+  },
+  mounted() {
+    this.fetchProducts(); // Fetch products when the component mounts
+  },
+};
+</script>
+
+<style scoped>
+button:hover {
+  cursor: pointer;
+}
+</style>

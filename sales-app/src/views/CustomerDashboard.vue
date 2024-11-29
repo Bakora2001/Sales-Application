@@ -21,9 +21,8 @@
         </nav>
       </aside>
   
-      <!-- Main Content -->
       <main class="flex-1 p-6">
-        <!-- Make Order Section -->
+        <!-- Making Order Section -->
         <section v-if="view === 'makeOrder'" class="bg-purple-600 p-6 rounded-lg shadow-lg">
           <h2 class="text-3xl font-semibold mb-4">Available Products</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -70,16 +69,16 @@
     name: "CustomerDashboard",
     data() {
       return {
-        view: "makeOrder", // Default view is 'Make Order'
-        products: [], // Products fetched from the backend
+        view: "makeOrder", // This is the default view is 'Make Order'
+        products: [], // These are Products fetched from the backend
         orders: [], // Orders placed by the customer
-        nextOrderNo: 1, // Initial order number
+        nextOrderNo: 1, // Initializing the order number
       };
     },
     methods: {
       async fetchProducts() {
         try {
-          const response = await fetch("http://localhost:3000/products"); // Replace with your API URL
+          const response = await fetch("http://localhost:3000/products");
           if (!response.ok) {
             throw new Error("Failed to fetch products");
           }
@@ -89,7 +88,7 @@
         }
       },
       addOrder(product) {
-        // Add the selected product to the orders
+        // Adding the selected product to the orders
         const order = {
           id: this.orders.length + 1,
           orderNo: this.nextOrderNo,
@@ -97,18 +96,17 @@
           price: product.price,
           quantity: product.quantity,
         };
-        this.orders.push(order); // Add to order history
+        this.orders.push(order); // Adding to order history
         this.nextOrderNo++; // Increment the order number
       },
     },
     mounted() {
-      this.fetchProducts(); // Fetch products when the component is mounted
+      this.fetchProducts(); // I am Fetching products when the component is mounted
     },
   };
   </script>
   
   <style scoped>
-  /* Sidebar hover effect */
   button:hover {
     cursor: pointer;
   }
