@@ -11,6 +11,18 @@
       "name": "Key",
       "price": 300,
       "quantity": 6
+    },
+    {
+      "id": "9041",
+      "name": "Bakora",
+      "price": 12,
+      "quantity": 7
+    },
+    {
+      "id": "1f0f",
+      "name": "KUKU CHIPS",
+      "price": 45,
+      "quantity": 6
     }
   ],
   "customers": [],

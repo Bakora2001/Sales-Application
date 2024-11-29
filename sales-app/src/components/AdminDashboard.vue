@@ -1,6 +1,7 @@
 <template>
-  <div class="bg-purple-50 min-h-screen p-6">
-    <h1 class="text-4xl font-extrabold text-center text-purple-700 mb-8">Admin Dashboard</h1>
+  <div class="bg-purple-700 min-h-screen p-6">
+    <!-- Dashboard Header -->
+    <h1 class="text-4xl font-extrabold text-center text-white mb-8">Admin Dashboard</h1>
 
     <!-- Products Section -->
     <section class="mb-10 bg-white p-6 rounded-lg shadow-lg">
