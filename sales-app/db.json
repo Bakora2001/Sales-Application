@@ -6,7 +6,7 @@
       "price": 4,
       "quantity": 7,
       "orderNo": 67,
-      "status": "Pending"
+      "status": "Completed"
     },
     {
       "id": "64b9",
@@ -39,6 +39,13 @@
       "quantity": 7,
       "orderNo": 22,
       "status": "Pending"
+    },
+    {
+      "id": "adf9",
+      "product": "memme",
+      "price": 111,
+      "quantity": 11,
+      "orderNo": 111
     }
   ],
   "customers": [],

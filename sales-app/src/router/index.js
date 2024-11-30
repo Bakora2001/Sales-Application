@@ -7,8 +7,8 @@ import SignupForm from "@/components/auth/SignupForm.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    path: "/login",
+    name: "login",
     component: LoginForm, // This shows the Login page as the default page
   },
   {
@@ -27,7 +27,7 @@ const routes = [
     component: SalesRepresentativeDashboard,
   },
   {
-    path: "/customer",
+    path: "/",
     name: "customer",
     component: CustomerDashboard,
   },

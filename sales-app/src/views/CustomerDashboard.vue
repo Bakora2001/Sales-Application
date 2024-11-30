@@ -25,7 +25,6 @@
     <main class="flex-1 p-6 relative">
       <!-- Login Button -->
       <button
-        v-if="!isLoggedIn"
         @click="navigateToLogin"
         class="absolute top-6 right-6 border-2 border-white rounded-full px-6 py-2 text-white font-semibold hover:bg-white hover:text-purple-700 transition duration-300"
       >
@@ -45,11 +44,10 @@
             <p class="text-white mb-1">Price: ${{ product.price }}</p>
             <p class="text-white mb-1">Quantity: {{ product.quantity }}</p>
             <button
-              :disabled="!isLoggedIn || product.status === 'Pending'"
-              @click="addOrder(product)"
+              @click="handleOrder(product)"
               class="bg-purple-700 mt-4 py-2 px-4 rounded-lg hover:bg-purple-800 transition"
             >
-              {{ isLoggedIn && product.status !== 'Pending' ? 'Order' : 'Log in to Order' }}
+              Order
             </button>
           </div>
         </div>
@@ -84,7 +82,6 @@ export default {
       view: "makeOrder", // Default view is 'Make Order'
       products: [], // Products fetched from the backend
       orders: [], // Orders placed by the customer
-      nextOrderNo: 1, // Initializing the order number
       isLoggedIn: false, // Track login state
     };
   },
@@ -108,74 +105,27 @@ export default {
           throw new Error("Failed to fetch orders");
         }
         this.orders = await response.json();
-        
-        // Set the next order number based on the highest order number from backend
-        if (this.orders.length > 0) {
-          this.nextOrderNo = Math.max(...this.orders.map(order => order.orderNo)) + 1;
-        }
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
     },
 
-    async addOrder(product) {
+    handleOrder(product) {
       if (!this.isLoggedIn) {
-        alert("Please log in to place an order.");
-        return;
-      }
-
-      // Update the product status to Pending
-      product.status = "Pending";
-
-      // Create the order object
-      const order = {
-        id: this.orders.length + 1,
-        orderNo: this.nextOrderNo,
-        name: product.name,
-        price: product.price,
-        quantity: product.quantity,
-        status: "Pending",
-      };
-
-      // Push the order into orders array
-      this.orders.push(order);
-      this.nextOrderNo++;
-
-      // Send the order to the backend
-      try {
-        await fetch("http://localhost:3000/orders", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(order),
-        });
-      } catch (error) {
-        console.error("Error adding order:", error);
-      }
-
-      // Update the product status in the backend
-      try {
-        await fetch(`http://localhost:3000/products/${product.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status: "Pending" }),
-        });
-      } catch (error) {
-        console.error("Error updating product status:", error);
+        this.$router.push("/login"); // Redirect to login page if not logged in
+      } else {
+        // Handle order logic for logged-in users (not shown as per request)
+        console.log("Order placed:", product.name);
       }
     },
 
     navigateToLogin() {
-      // This is the logic to navigate to login page
-      this.$router.push('/login');
+      this.$router.push("/login"); // It navigates to the login page
     },
   },
   mounted() {
-    this.fetchProducts(); // This is a method that fetches the products when the component is mounted
-    this.fetchOrders(); // THis is a method that fetches the orders when the component is mounted
+    this.fetchProducts(); // Fetch products when the component is mounted
+    this.fetchOrders(); // Fetch orders when the component is mounted
   },
 };
 </script>
