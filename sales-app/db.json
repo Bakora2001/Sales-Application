@@ -6,7 +6,7 @@
       "price": 4,
       "quantity": 7,
       "orderNo": 67,
-      "status": "Pending"
+      "status": "Completed"
     },
     {
       "id": "64b9",
@@ -15,6 +15,30 @@
       "quantity": 6,
       "orderNo": 12,
       "status": "Completed"
+    },
+    {
+      "id": "3067",
+      "product": "bed",
+      "price": 34,
+      "quantity": 3,
+      "orderNo": 102,
+      "status": "Completed"
+    },
+    {
+      "id": "3a6e",
+      "product": "soko",
+      "price": 100,
+      "quantity": 100,
+      "orderNo": 100,
+      "status": "Completed"
+    },
+    {
+      "id": "71f2",
+      "product": "chair",
+      "price": 24,
+      "quantity": 7,
+      "orderNo": 22,
+      "status": "Pending"
     }
   ],
   "customers": [],
