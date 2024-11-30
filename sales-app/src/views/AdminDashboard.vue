@@ -34,7 +34,7 @@
               type="text"
               id="productName"
               required
-              class="w-full p-2 rounded-md"
+              class="w-full p-2 rounded-md text-black"
             />
           </div>
           <div>
@@ -44,7 +44,7 @@
               type="number"
               id="price"
               required
-              class="w-full p-2 rounded-md"
+              class="w-full p-2 rounded-md text-black"
             />
           </div>
           <div>
@@ -54,7 +54,7 @@
               type="number"
               id="quantity"
               required
-              class="w-full p-2 rounded-md"
+              class="w-full p-2 rounded-md text-black"
             />
           </div>
           <div>
@@ -64,7 +64,7 @@
               type="number"
               id="orderNo"
               required
-              class="w-full p-2 rounded-md"
+              class="w-full p-2 rounded-md text-black"
             />
           </div>
           <button
@@ -85,7 +85,7 @@
             :key="product.orderNo"
             class="border border-purple-400 rounded-lg p-4 bg-purple-500 hover:shadow-lg transition-shadow duration-300"
           >
-            <h3 class="text-lg font-bold text-white mb-2">{{ product.product }}</h3>
+            <h3 class="text-lg font-bold text-white mb-2">{{ product.productName }}</h3>
             <p class="text-white mb-1">Order No: {{ product.orderNo }}</p>
             <p class="text-white mb-1">Price: ${{ product.price }}</p>
             <p class="text-white mb-1">Quantity: {{ product.quantity }}</p>

@@ -1,70 +1,32 @@
 {
   "products": [
     {
-      "id": "bd4d",
-      "name": "Maxwel bakora",
-      "price": 120,
-      "quantity": 4
-    },
-    {
-      "id": "b2f6",
-      "name": "Key",
-      "price": 300,
-      "quantity": 6
-    },
-    {
-      "id": "9041",
-      "name": "Bakora",
-      "price": 12,
-      "quantity": 7
-    },
-    {
-      "id": "1f0f",
-      "name": "KUKU CHIPS",
-      "price": 45,
-      "quantity": 6
-    },
-    {
-      "id": "4743",
-      "name": "mm",
-      "price": 12,
-      "quantity": 34,
-      "OrderNo": null
-    },
-    {
-      "id": "df71",
-      "name": "chocholate",
-      "price": 45,
+      "id": "0b05",
+      "product": "omwoyo",
+      "price": 230,
       "quantity": 8,
-      "OrderNo": null
+      "orderNo": 11
     },
     {
-      "id": "e94a",
-      "name": "gg",
-      "price": 56,
-      "quantity": 7,
-      "OrderNo": null
+      "id": "7987",
+      "product": "maxwel",
+      "price": 234,
+      "quantity": 8,
+      "orderNo": 9
     },
     {
-      "id": "3daa",
-      "name": "shoesfootball",
-      "price": 45,
-      "quantity": 5,
-      "OrderNo": null
-    },
-    {
-      "id": "c023",
-      "name": "nerde",
-      "price": 23,
-      "quantity": 45,
-      "OrderNo": null
-    },
-    {
-      "id": "042c",
-      "product": "bako",
+      "id": "c352",
+      "product": "Cake",
       "price": 20,
+      "quantity": 3,
+      "orderNo": 102
+    },
+    {
+      "id": "f79a",
+      "product": "bed",
+      "price": 40,
       "quantity": 4,
-      "orderNo": 2345
+      "orderNo": 10
     }
   ],
   "customers": [],
