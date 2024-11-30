@@ -22,16 +22,15 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6">
-      <!-- Login Button at Top Right -->
-      <div class="absolute top-6 right-6">
-        <button
-          @click="redirectToLogin"
-          class="bg-purple-700 py-2 px-4 rounded-lg text-white hover:bg-purple-800 transition"
-        >
-          Login
-        </button>
-      </div>
+    <main class="flex-1 p-6 relative">
+      <!-- Login Button -->
+      <button
+        v-if="!isLoggedIn"
+        @click="navigateToLogin"
+        class="absolute top-6 right-6 border-2 border-white rounded-full px-6 py-2 text-white font-semibold hover:bg-white hover:text-purple-700 transition duration-300"
+      >
+        Login
+      </button>
 
       <!-- Making Order Section -->
       <section v-if="view === 'makeOrder'" class="bg-purple-600 p-6 rounded-lg shadow-lg">
@@ -46,11 +45,11 @@
             <p class="text-white mb-1">Price: ${{ product.price }}</p>
             <p class="text-white mb-1">Quantity: {{ product.quantity }}</p>
             <button
-              :disabled="product.status === 'Pending'"
+              :disabled="!isLoggedIn || product.status === 'Pending'"
               @click="addOrder(product)"
               class="bg-purple-700 mt-4 py-2 px-4 rounded-lg hover:bg-purple-800 transition"
             >
-              {{ product.status === 'Pending' ? 'Pending' : 'Order' }}
+              {{ isLoggedIn && product.status !== 'Pending' ? 'Order' : 'Log in to Order' }}
             </button>
           </div>
         </div>
@@ -86,6 +85,7 @@ export default {
       products: [], // Products fetched from the backend
       orders: [], // Orders placed by the customer
       nextOrderNo: 1, // Initializing the order number
+      isLoggedIn: false, // Track login state
     };
   },
   methods: {
@@ -119,9 +119,8 @@ export default {
     },
 
     async addOrder(product) {
-      // Check if the user is logged in (replace with your actual login check)
-      if (!this.isLoggedIn()) {
-        this.redirectToLogin(); // Redirect to login if not logged in
+      if (!this.isLoggedIn) {
+        alert("Please log in to place an order.");
         return;
       }
 
@@ -169,18 +168,14 @@ export default {
       }
     },
 
-    isLoggedIn() {
-      // Example of a simple login check, replace with actual logic
-      return localStorage.getItem("userLoggedIn") === "true";
+    navigateToLogin() {
+      // This is the logic to navigate to login page
+      this.$router.push('/login');
     },
-
-    redirectToLogin() {
-      this.$router.push("/login"); // This will redirect to the login page
-    }
   },
   mounted() {
-    this.fetchProducts(); // It will fetch products when the component is mounted
-    this.fetchOrders(); // For this one will be orders
+    this.fetchProducts(); // This is a method that fetches the products when the component is mounted
+    this.fetchOrders(); // THis is a method that fetches the orders when the component is mounted
   },
 };
 </script>
