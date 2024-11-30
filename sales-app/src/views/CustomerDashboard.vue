@@ -2,7 +2,7 @@
   <div class="flex bg-purple-700 min-h-screen text-white">
     <!-- Sidebar -->
     <aside class="w-1/4 bg-purple-800 p-6">
-      <h2 class="text-2xl font-bold mb-6">Customer Dashboard</h2>
+      <h2 class="text-2xl font-bold mb-6">MaliSafi Limited</h2>
       <nav class="space-y-4">
         <button
           @click="view = 'makeOrder'"
@@ -21,7 +21,18 @@
       </nav>
     </aside>
 
+    <!-- Main Content -->
     <main class="flex-1 p-6">
+      <!-- Login Button at Top Right -->
+      <div class="absolute top-6 right-6">
+        <button
+          @click="redirectToLogin"
+          class="bg-purple-700 py-2 px-4 rounded-lg text-white hover:bg-purple-800 transition"
+        >
+          Login
+        </button>
+      </div>
+
       <!-- Making Order Section -->
       <section v-if="view === 'makeOrder'" class="bg-purple-600 p-6 rounded-lg shadow-lg">
         <h2 class="text-3xl font-semibold mb-4">Available Products</h2>
@@ -89,11 +100,35 @@ export default {
         console.error("Error fetching products:", error);
       }
     },
+
+    async fetchOrders() {
+      try {
+        const response = await fetch("http://localhost:3000/orders");
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+        this.orders = await response.json();
+        
+        // Set the next order number based on the highest order number from backend
+        if (this.orders.length > 0) {
+          this.nextOrderNo = Math.max(...this.orders.map(order => order.orderNo)) + 1;
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    },
+
     async addOrder(product) {
+      // Check if the user is logged in (replace with your actual login check)
+      if (!this.isLoggedIn()) {
+        this.redirectToLogin(); // Redirect to login if not logged in
+        return;
+      }
+
       // Update the product status to Pending
       product.status = "Pending";
 
-      // Push the order into orders array
+      // Create the order object
       const order = {
         id: this.orders.length + 1,
         orderNo: this.nextOrderNo,
@@ -102,10 +137,25 @@ export default {
         quantity: product.quantity,
         status: "Pending",
       };
+
+      // Push the order into orders array
       this.orders.push(order);
       this.nextOrderNo++;
 
-      // Update the backend (db.json)
+      // Send the order to the backend
+      try {
+        await fetch("http://localhost:3000/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(order),
+        });
+      } catch (error) {
+        console.error("Error adding order:", error);
+      }
+
+      // Update the product status in the backend
       try {
         await fetch(`http://localhost:3000/products/${product.id}`, {
           method: "PATCH",
@@ -118,9 +168,19 @@ export default {
         console.error("Error updating product status:", error);
       }
     },
+
+    isLoggedIn() {
+      // Example of a simple login check, replace with actual logic
+      return localStorage.getItem("userLoggedIn") === "true";
+    },
+
+    redirectToLogin() {
+      this.$router.push("/login"); // This will redirect to the login page
+    }
   },
   mounted() {
-    this.fetchProducts(); // Fetch products when the component is mounted
+    this.fetchProducts(); // It will fetch products when the component is mounted
+    this.fetchOrders(); // For this one will be orders
   },
 };
 </script>

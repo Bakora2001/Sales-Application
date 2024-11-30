@@ -6,7 +6,7 @@
       "price": 4,
       "quantity": 7,
       "orderNo": 67,
-      "status": "Completed"
+      "status": "Pending"
     },
     {
       "id": "64b9",
@@ -14,7 +14,7 @@
       "price": 20,
       "quantity": 6,
       "orderNo": 12,
-      "status": "Completed"
+      "status": "Pending"
     },
     {
       "id": "3067",
@@ -22,7 +22,7 @@
       "price": 34,
       "quantity": 3,
       "orderNo": 102,
-      "status": "Completed"
+      "status": "Pending"
     },
     {
       "id": "3a6e",
@@ -30,7 +30,7 @@
       "price": 100,
       "quantity": 100,
       "orderNo": 100,
-      "status": "Completed"
+      "status": "Pending"
     },
     {
       "id": "71f2",
