@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AdminDashboard from '@/views/AdminDashboard.vue';
 import CustomerDashboard from '@/views/CustomerDashboard.vue';
-// import SalesRepresentativeDashboard from '@/views/SalesRepresentativeDashboard.vue';
+import SalesRepresentativeDashboard from '@/views/SalesRepresentativeDashboard.vue';
 
 const routes = [
   {
@@ -14,11 +14,11 @@ const routes = [
     name: 'admin',
     component: AdminDashboard,
   },
-//   {
-//     path: '/sales-representative',
-//     name: 'salesRepresentative',
-//     component: SalesRepresentativeDashboard,
-//   },
+  {
+    path: '/sales',
+    name: 'salesRepresentative',
+    component: SalesRepresentativeDashboard,
+  },
 ];
 
 const router = createRouter({

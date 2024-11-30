@@ -1,32 +1,20 @@
 {
   "products": [
     {
-      "id": "0b05",
-      "product": "omwoyo",
-      "price": 230,
-      "quantity": 8,
-      "orderNo": 11
-    },
-    {
-      "id": "7987",
-      "product": "maxwel",
-      "price": 234,
-      "quantity": 8,
-      "orderNo": 9
-    },
-    {
-      "id": "c352",
+      "id": "2e20",
       "product": "Cake",
-      "price": 20,
-      "quantity": 3,
-      "orderNo": 102
+      "price": 4,
+      "quantity": 7,
+      "orderNo": 67,
+      "status": "Pending"
     },
     {
-      "id": "f79a",
-      "product": "bed",
-      "price": 40,
-      "quantity": 4,
-      "orderNo": 10
+      "id": "64b9",
+      "product": "KUku",
+      "price": 20,
+      "quantity": 6,
+      "orderNo": 12,
+      "status": "Completed"
     }
   ],
   "customers": [],
