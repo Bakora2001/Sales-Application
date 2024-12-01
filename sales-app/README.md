@@ -35,8 +35,8 @@ Each product in the application includes:
 ## Tech Stack
 
 - **Frontend Framework**: Vue.js
-- **Backend Framework**: 
-- **Styling**: Tailwind CSS or custom CSS
+- **Backend Framework**:  Flask, python,mysql
+- **Styling**: Tailwind CSS/normal css
 
 ---
 
