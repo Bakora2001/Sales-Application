@@ -3,7 +3,9 @@
     class="min-h-screen flex items-center justify-center bg-purple-700 bg-cover bg-center"
     style="background-image: url('@/assets/login4.jpg')"
   >
-    <div class="bg-purple-800 bg-opacity-90 w-full max-w-md p-6 rounded-lg shadow-lg">
+    <div
+      class="bg-purple-800 bg-opacity-90 w-full max-w-md p-6 rounded-lg shadow-lg"
+    >
       <h2 class="text-3xl font-bold text-white text-center mb-6">Login</h2>
       <form @submit.prevent="handleSubmit" class="space-y-4">
         <!-- Email Input -->
@@ -59,6 +61,9 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
+import { checkUser, loginUser } from "../../utils/user";
+
 export default {
   name: "LoginForm",
   data() {
@@ -68,15 +73,34 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
-      // Handle login logic here
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
+    async handleSubmit() {
+      // Handle the login form submission
+      const { token, error } = await loginUser(this.email, this.password);
+
+      if (error) {
+        // If there's an error, show an alert
+        alert(`${error.message} : ${error.status}`);
+      } else {
+        // If successful, store the token in local storage
+        localStorage.setItem("token", token);
+        // Redirect the user after successful login
+        this.$router.push("/"); // Redirect to the home page (or another appropriate page)
+      }
     },
+  },
+  async created() {
+    const router = useRouter();
+    try {
+      // Check if the user is already logged in
+      const { user, error } = await checkUser();
+
+      if (user) {
+        // If user is logged in, redirect to the home page (or another page)
+        router.push("/");
+      }
+    } catch (error) {}
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

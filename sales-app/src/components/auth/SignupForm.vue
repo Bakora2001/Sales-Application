@@ -1,16 +1,15 @@
 <template>
-  <div
-    class="min-h-screen flex items-center justify-center bg-purple-700 bg-cover bg-center"
-    style="background-image: url('@/assets/login4.jpg')"
-  >
-    <div class="bg-purple-800 bg-opacity-90 w-full max-w-md p-6 rounded-lg shadow-lg">
+  <div class="flex min-h-screen bg-purple-700 items-center justify-center">
+    <div
+      class="bg-purple-800 bg-opacity-90 p-6 rounded-lg shadow-lg w-full max-w-md"
+    >
       <h2 class="text-3xl font-bold text-white text-center mb-6">Sign Up</h2>
       <form @submit.prevent="handleSignUp" class="space-y-4">
         <!-- Name Input -->
         <div>
-          <label for="name" class="block text-white font-medium mb-2">
-            Full Name
-          </label>
+          <label for="name" class="block text-white font-medium mb-2"
+            >Full Name</label
+          >
           <input
             id="name"
             type="text"
@@ -23,9 +22,9 @@
 
         <!-- Email Input -->
         <div>
-          <label for="email" class="block text-white font-medium mb-2">
-            Email Address
-          </label>
+          <label for="email" class="block text-white font-medium mb-2"
+            >Email Address</label
+          >
           <input
             id="email"
             type="email"
@@ -38,15 +37,15 @@
 
         <!-- Password Input -->
         <div>
-          <label for="password" class="block text-white font-medium mb-2">
-            Password
-          </label>
+          <label for="password" class="block text-white font-medium mb-2"
+            >Password</label
+          >
           <input
             id="password"
             type="password"
             v-model="password"
             required
-            placeholder="Create a password"
+            placeholder="Enter your password"
             class="w-full px-4 py-2 rounded-lg bg-purple-700 text-white placeholder-gray-300 focus:ring-2 focus:ring-purple-500 outline-none"
           />
         </div>
@@ -74,6 +73,8 @@
 </template>
 
 <script>
+import { checkUser, signupUser } from "../../utils/user";
+
 export default {
   name: "SignUpForm",
   data() {
@@ -84,16 +85,37 @@ export default {
     };
   },
   methods: {
-    handleSignUp() {
-      // Handle sign-up logic here
-      console.log("Name:", this.name);
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
+    async handleSignUp() {
+      try {
+        const { token, error } = await signupUser(
+          this.name,
+          this.email,
+          this.password
+        );
+
+        if (error) {
+          alert(`${error.message} : ${error.status}`);
+        } else {
+          localStorage.setItem("token", token); // Store the token in localStorage
+          this.$router.push("/"); // Redirect to the home page upon successful sign-up
+        }
+      } catch (err) {
+        alert("An error occurred while signing up. Please try again.");
+      }
     },
+  },
+  created() {
+    const { user, error } = checkUser();
+
+    if (user) {
+      this.$router.push("/");
+    }
   },
 };
 </script>
 
 <style scoped>
-
+button:hover {
+  cursor: pointer;
+}
 </style>
