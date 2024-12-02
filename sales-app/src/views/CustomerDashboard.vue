@@ -1,7 +1,7 @@
 <template>
-  <div class="flex bg-purple-700 min-h-screen text-white">
+  <div class="flex flex-col md:flex-row bg-purple-700 min-h-screen text-white">
     <!-- Sidebar -->
-    <aside class="w-1/4 bg-purple-800 p-6">
+    <aside class="w-full md:w-1/4 bg-purple-800 p-6">
       <h2 class="text-2xl font-bold mb-6">MaliSafi Limited</h2>
       <nav class="space-y-4">
         <button

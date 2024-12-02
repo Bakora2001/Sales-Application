@@ -1,7 +1,7 @@
 <template>
-  <div class="flex bg-purple-700 min-h-screen text-white">
+  <div class="flex bg-purple-700 min-h-screen text-white flex-col sm:flex-row">
     <!-- Sidebar -->
-    <aside class="w-1/4 bg-purple-800 p-6">
+    <aside class="w-full sm:w-1/4 bg-purple-800 p-6">
       <h2 class="text-2xl font-bold mb-6">Admin Dashboard</h2>
       <nav class="space-y-4">
         <button
@@ -29,7 +29,7 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6">
+    <main class="flex-1 p-6 mt-6 sm:mt-0">
       <!-- Logout Button -->
       <button
         v-if="user"
@@ -273,53 +273,39 @@ export default {
           console.error("There was an error adding the product:", error);
         });
     },
-    // Log out user
+    // Handle user log out
     handleLogOut() {
-      localStorage.removeItem("token"); // Remove user data from local storage
-      this.$router.push("/login"); // Redirect to login
+      localStorage.removeItem("token");
+      this.user = null;
+      this.$router.push("/login");
     },
   },
-  async mounted() {
-    const router = useRouter();
-    try {
-      // Check if the user is logged in
-      const { user, error } = await checkUser();
-
-      if (error) {
-        alert(`${error.message} : ${error.status}`);
-        if (this.$route.path !== "/login") {
-          router.push("/login"); // Redirect to login if not already on the login page
-        }
-      } else {
-        this.user = user; // Set the user data
-
-        // Redirect based on the user role
-        if (user) {
-          if (user.role === "customer" && this.$route.path !== "/") {
-            router.push("/"); // Redirect to the customer dashboard
-          } else if (
-            user.role === "sales_rep" &&
-            this.$route.path !== "/sales"
-          ) {
-            router.push("/sales"); // Redirect to the sales dashboard
-          }
-        }
+  watch: {
+    view(newView) {
+      if (newView === "viewUsers") {
+        this.fetchUsers();
       }
-    } catch (error) {
-      console.error("Error checking user:", error);
-      if (this.$route.path !== "/login") {
-        router.push("/login"); // Redirect to login if there's an error
+      if (newView === "viewProducts") {
+        this.fetchProducts();
       }
+    },
+  },
+  mounted() {
+    // Check if the user is logged in
+    this.user = checkUser();
+
+    if (!this.user) {
+      this.$router.push("/login");
     }
 
-    this.fetchProducts(); // Fetch products when the component is mounted
-    this.fetchUsers(); // Fetch users when the component is mounted
+    // Fetch the products initially
+    this.fetchProducts();
+    // Fetch the users initially
+    this.fetchUsers();
   },
 };
 </script>
 
 <style scoped>
-button:hover {
-  cursor: pointer;
-}
+/* Add custom styles if necessary */
 </style>
