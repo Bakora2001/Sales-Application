@@ -1,5 +1,8 @@
 <template>
-  <div class="flex min-h-screen bg-purple-700 items-center justify-center">
+  <div
+    class="flex min-h-screen items-center justify-center bg-purple-700 bg-cover bg-center"
+    :style="{ backgroundImage: 'url(\'/src/assets/login4.jpg\')' }"
+  >
     <div
       class="bg-purple-800 bg-opacity-90 p-6 rounded-lg shadow-lg w-full max-w-md"
     >

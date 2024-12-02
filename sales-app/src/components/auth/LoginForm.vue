@@ -1,7 +1,7 @@
 <template>
   <div
     class="min-h-screen flex items-center justify-center bg-purple-700 bg-cover bg-center"
-    style="background-image: url('@/assets/login4.jpg')"
+    :style="{ backgroundImage: 'url(\'/src/assets/login4.jpg\')' }"
   >
     <div
       class="bg-purple-800 bg-opacity-90 w-full max-w-md p-6 rounded-lg shadow-lg"
@@ -103,4 +103,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add any additional styling if needed */
+</style>
